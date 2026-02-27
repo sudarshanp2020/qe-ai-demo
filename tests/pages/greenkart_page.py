@@ -19,16 +19,27 @@ class GreenKartPage:
         
     def search_product(self, product_name: str):
         """Search for a product by name."""
+        self.search_input.clear()
         self.search_input.fill(product_name)
-        self.page.wait_for_timeout(1000)  # Wait for search results
-        
+        # Wait for search to filter products
+        self.page.wait_for_timeout(1500)
+
     def get_visible_products(self):
-        """Get all visible product cards."""
-        return self.product_cards.all()
-    
+        """Get all visible product cards (not hidden by search)."""
+        self.page.wait_for_timeout(500)
+        # Filter only visible products (search hides non-matching products)
+        all_products = self.product_cards.all()
+        visible_products = []
+        for product in all_products:
+            if product.is_visible():
+                visible_products.append(product)
+        return visible_products
+
     def get_product_name(self, product_element):
         """Get product name from product card."""
-        return product_element.locator("h4.product-name").inner_text()
+        name_locator = product_element.locator("h4.product-name")
+        # Use text_content which doesn't wait/timeout
+        return name_locator.text_content().strip()
     
     def get_product_price(self, product_element):
         """Get product price from product card."""

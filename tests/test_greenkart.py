@@ -11,11 +11,11 @@ class TestGreenKartSearch:
         """Test searching for a product by name."""
         greenkart = GreenKartPage(page)
         
-        # Search for broccoli
+        # Search for brocolli (note: website has typo - one 'c')
         greenkart.search_product("bro")
         
-        # Verify broccoli is displayed
-        assert greenkart.verify_product_displayed("broccoli"), "Broccoli should be displayed in search results"
+        # Verify brocolli is displayed
+        assert greenkart.verify_product_displayed("brocolli"), "Brocolli should be displayed in search results"
         
         # Verify only matching products are shown
         products = greenkart.get_visible_products()
@@ -100,13 +100,13 @@ class TestGreenKartCart:
         """Test adding a specific product by name."""
         greenkart = GreenKartPage(page)
         
-        # Search and add broccoli
-        greenkart.search_product("broccoli")
-        greenkart.add_product_to_cart_by_name("broccoli")
+        # Search and add brocolli (note: website has typo - one 'c')
+        greenkart.search_product("brocolli")
+        greenkart.add_product_to_cart_by_name("brocolli")
         
         # Verify cart count
         cart_count = greenkart.get_cart_count()
-        assert "1" in cart_count, "Cart should show 1 item after adding broccoli"
+        assert "1" in cart_count, "Cart should show 1 item after adding brocolli"
     
     @pytest.mark.regression
     def test_cart_icon_clickable(self, page: Page):

@@ -9,7 +9,7 @@ BASE_URL = "https://rahulshettyacademy.com/seleniumPractise/#/"
 def browser_instance():
     """Create a browser instance for the test session."""
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=False, slow_mo=500)
+        browser = playwright.firefox.launch(headless=False, slow_mo=500)
         yield browser
         browser.close()
 
